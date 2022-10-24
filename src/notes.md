@@ -35,7 +35,7 @@ GET PATH
 DELETE PATH
     /uses/:useId                (Delete a use metric by ID)
 
-* GET & POST requests are not allowed on the uses route status is set to 405
+* PUT & POST requests are not allowed on the uses route status is set to 405
 
 * DELETE request responds w/sendStatus(204)
 

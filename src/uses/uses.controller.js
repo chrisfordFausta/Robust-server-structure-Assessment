@@ -1,11 +1,14 @@
+const urlsData = require("../data/urls-data");
 const uses = require("../data/uses-data")
 
 //Route-Level Middleware
 const useExist = (req, res, next) => {
     const { useId } = req.params;
     const foundUse = uses.find(use => use.id === Number(useId))
+    console.log("foundUse: ", foundUse)
     if (foundUse) {
-        res.foundUse = foundUse;
+        req.useId = useId
+        req.foundUse = foundUse;
         return next();
     }
     next({
@@ -21,11 +24,14 @@ const list = (req, res) => {
 }
 
 const read = (req, res) => {
-    res.json({ data: res.foundUse })
+    res.json({ data: req.foundUse })
 } 
 
 const destroy = (req, res) => {
-    const deleteUse = uses.filter(use => use.id !== res.foundUse.id)
+    const index = uses.findIndex(use => use.urlId == req.useId)
+    if (index > -1) {
+        urls.splice(index, 1)
+    }
     res.sendStatus(204)
 }
 
