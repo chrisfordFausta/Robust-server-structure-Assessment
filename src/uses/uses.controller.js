@@ -1,11 +1,9 @@
-const urlsData = require("../data/urls-data");
 const uses = require("../data/uses-data")
 
 //Route-Level Middleware
 const useExist = (req, res, next) => {
     const { useId } = req.params;
     const foundUse = uses.find(use => use.id === Number(useId))
-    console.log("foundUse: ", foundUse)
     if (foundUse) {
         req.useId = useId
         req.foundUse = foundUse;
@@ -29,7 +27,7 @@ const read = (req, res) => {
 
 const destroy = (req, res) => {
     const index = uses.findIndex(use => use.urlId == req.useId)
-    if (index > -1) {
+    if (index !== -1) {
         urls.splice(index, 1)
     }
     res.sendStatus(204)
